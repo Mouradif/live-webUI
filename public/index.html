@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html ng-app="beacon-dashboard">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-csp.css" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+    <div class="container" style="margin-top: 150px" ng-controller="beaconCtrl">
+        <div class="panel panel-default" ng-repeat="beacon in beacons" >
+            <div class="panel-heading" ng-bind="beacon.name"></div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-5">
+                        <img class="led" ng-src="{{ (beacon.state) ? 'img/led-green-black.png' : 'img/led-red-black.png' }}" />
+                    </div>
+                    <div class="col-xs-7">
+                        <p ng-bind="((beacon.state) ? 'Online' : 'Offline') + ' for ' + (beacon.ts | date:'mm:ss')"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="node_modules/angular/angular.min.js"></script>
+    <script src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="src/socket.js"></script>
+    <script src="src/app.js"></script>
+</body>
+</html>
